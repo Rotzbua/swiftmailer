@@ -22,7 +22,7 @@ interface Swift_Signers_HeaderSigner extends Swift_Signer, Swift_InputByteStream
      *
      * @return self
      */
-    public function ignoreHeader($header_name);
+    public function ignoreHeader(string $header_name);
 
     /**
      * Prepare the Signer to get a new Body.
@@ -61,5 +61,5 @@ interface Swift_Signers_HeaderSigner extends Swift_Signer, Swift_InputByteStream
      *
      * @return array
      */
-    public function getAlteredHeaders();
+    public function getAlteredHeaders(): array;
 }

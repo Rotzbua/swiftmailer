@@ -130,7 +130,7 @@ class Swift_Signers_OpenDKIMSigner extends Swift_Signers_DKIMSigner
      *
      * @return $this
      */
-    public function setSignatureTimestamp($time)
+    public function setSignatureTimestamp(int $time)
     {
         $this->signatureTimestamp = $time;
 
@@ -144,7 +144,7 @@ class Swift_Signers_OpenDKIMSigner extends Swift_Signers_DKIMSigner
      *
      * @return $this
      */
-    public function setSignatureExpiration($time)
+    public function setSignatureExpiration(int $time)
     {
         $this->signatureExpiration = $time;
 
@@ -158,9 +158,9 @@ class Swift_Signers_OpenDKIMSigner extends Swift_Signers_DKIMSigner
      *
      * @return $this
      */
-    public function setDebugHeaders($debug)
+    public function setDebugHeaders(bool $debug)
     {
-        $this->debugHeaders = (bool) $debug;
+        $this->debugHeaders = $debug;
 
         return $this;
     }

@@ -30,9 +30,9 @@ interface Swift_InputByteStream
      *
      * @param string $bytes
      *
-     * @throws Swift_IoException
-     *
      * @return int
+     *
+     * @throws Swift_IoException
      */
     public function write($bytes);
 

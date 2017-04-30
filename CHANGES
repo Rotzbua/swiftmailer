@@ -1,6 +1,11 @@
 Changelog
 =========
 
+UNRELEASED
+------------------
+ * security: minimum key DKIM key size raised to 1024bit, see VU#268267
+ * updated DKIM class to latest RFC
+
 6.0.2 (2017-XX-XX)
 ------------------
 

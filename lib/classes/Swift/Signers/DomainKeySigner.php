@@ -153,11 +153,7 @@ class Swift_Signers_DomainKeySigner implements Swift_Signers_HeaderSigner
      *
      * @param string $bytes
      *
-     * @return int
-     *
      * @throws Swift_IoException
-     *
-     * @return $this
      */
     public function write($bytes)
     {
@@ -165,8 +161,6 @@ class Swift_Signers_DomainKeySigner implements Swift_Signers_HeaderSigner
         foreach ($this->bound as $is) {
             $is->write($bytes);
         }
-
-        return $this;
     }
 
     /**
@@ -319,7 +313,7 @@ class Swift_Signers_DomainKeySigner implements Swift_Signers_HeaderSigner
      *
      * @return array
      */
-    public function getAlteredHeaders()
+    public function getAlteredHeaders(): array
     {
         if ($this->debugHeaders) {
             return array('DomainKey-Signature', 'X-DebugHash');
@@ -335,7 +329,7 @@ class Swift_Signers_DomainKeySigner implements Swift_Signers_HeaderSigner
      *
      * @return $this
      */
-    public function ignoreHeader($header_name)
+    public function ignoreHeader(string $header_name)
     {
         $this->ignoredHeaders[strtolower($header_name)] = true;
 
