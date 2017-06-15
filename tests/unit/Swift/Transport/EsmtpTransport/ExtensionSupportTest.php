@@ -92,6 +92,16 @@ class Swift_Transport_EsmtpTransport_ExtensionSupportTest extends Swift_Transpor
         $ext2 = $this->getMockery('Swift_Transport_EsmtpHandler')->shouldIgnoreMissing();
         $ext3 = $this->getMockery('Swift_Transport_EsmtpHandler')->shouldIgnoreMissing();
 
+        $ext1->shouldReceive('getPriorityOver')
+            ->zeroOrMoreTimes()
+            ->andReturn(0);
+        $ext2->shouldReceive('getPriorityOver')
+            ->zeroOrMoreTimes()
+            ->andReturn(0);
+        $ext3->shouldReceive('getPriorityOver')
+            ->zeroOrMoreTimes()
+            ->andReturn(0);
+        
         $buf->shouldReceive('readLine')
             ->once()
             ->with(0)
