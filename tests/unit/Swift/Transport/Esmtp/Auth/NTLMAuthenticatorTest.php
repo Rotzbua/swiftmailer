@@ -157,7 +157,8 @@ class Swift_Transport_Esmtp_Auth_NTLMAuthenticatorTest extends \SwiftMailerTestC
                         $this->invokePrivateMethod('createMessage3', $ntlm, array($domain, $username, hex2bin('4d0045004d00420045005200'), hex2bin('bf2e015119f6bdb3f6fdb768aa12d478f5ce3d2401c8f6e9'), hex2bin('caa4da8f25d5e840974ed8976d3ada46010100000000000030fa7e3c677bc301f5ce3d2401c8f6e90000000002000c0054004500530054004e00540001000c004d0045004d0042004500520003001e006d0065006d006200650072002e0074006500730074002e0063006f006d000000000000000000'))
                     ))."\r\n", array(235));
 
-        $this->assertTrue($ntlm->authenticate($agent, $username.'@'.$domain, $secret, hex2bin('30fa7e3c677bc301'), hex2bin('f5ce3d2401c8f6e9')), '%s: The buffer accepted all commands authentication should succeed');
+        $this->assertTrue($ntlm->authenticate($agent, $username.'@'.$domain, $secret), '%s: The buffer accepted all commands authentication should succeed');
+        //$this->assertTrue($ntlm->authenticate($agent, $username.'@'.$domain, $secret, hex2bin('30fa7e3c677bc301'), hex2bin('f5ce3d2401c8f6e9')), '%s: The buffer accepted all commands authentication should succeed');
     }
 
     public function testAuthenticationFailureSendRsetAndReturnFalse()
@@ -181,17 +182,17 @@ class Swift_Transport_Esmtp_Auth_NTLMAuthenticatorTest extends \SwiftMailerTestC
         $this->assertFalse($ntlm->authenticate($agent, $username.'@'.$domain, $secret, hex2bin('30fa7e3c677bc301'), hex2bin('f5ce3d2401c8f6e9')), '%s: Authentication fails, so RSET should be sent');
     }
 
-    private function getAuthenticator()
+    private function getAuthenticator(): \Swift_Transport_Esmtp_Auth_NTLMAuthenticator
     {
         return new Swift_Transport_Esmtp_Auth_NTLMAuthenticator();
     }
 
-    private function getAgent()
+    private function getAgent(): \Mockery\Mock
     {
         return $this->getMockery('Swift_Transport_SmtpAgent')->shouldIgnoreMissing();
     }
 
-    private function invokePrivateMethod($method, $instance, array $args = array())
+    private function invokePrivateMethod(string $method, $instance, array $args = array())
     {
         $methodC = new ReflectionMethod($instance, trim($method));
         $methodC->setAccessible(true);
