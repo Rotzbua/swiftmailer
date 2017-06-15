@@ -18,9 +18,9 @@ interface Swift_Transport_EsmtpHandler
     /**
      * Get the name of the ESMTP extension this handles.
      *
-     * @return bool
+     * @return string
      */
-    public function getHandledKeyword();
+    public function getHandledKeyword(): string;
 
     /**
      * Set the parameters which the EHLO greeting indicated.
@@ -41,14 +41,14 @@ interface Swift_Transport_EsmtpHandler
      *
      * @return string[]
      */
-    public function getMailParams();
+    public function getMailParams(): array;
 
     /**
      * Get params which are appended to RCPT TO:<>.
      *
      * @return string[]
      */
-    public function getRcptParams();
+    public function getRcptParams(): array;
 
     /**
      * Runs when a command is due to be sent.
@@ -70,14 +70,14 @@ interface Swift_Transport_EsmtpHandler
      *
      * @return int
      */
-    public function getPriorityOver($esmtpKeyword);
+    public function getPriorityOver($esmtpKeyword): int;
 
     /**
      * Returns an array of method names which are exposed to the Esmtp class.
      *
      * @return string[]
      */
-    public function exposeMixinMethods();
+    public function exposeMixinMethods(): array;
 
     /**
      * Tells this handler to clear any buffers and reset its state.

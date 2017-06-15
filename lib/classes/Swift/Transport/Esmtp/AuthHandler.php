@@ -75,7 +75,7 @@ class Swift_Transport_Esmtp_AuthHandler implements Swift_Transport_EsmtpHandler
      *
      * @return Swift_Transport_Esmtp_Authenticator[]
      */
-    public function getAuthenticators()
+    public function getAuthenticators(): array
     {
         return $this->authenticators;
     }
@@ -95,7 +95,7 @@ class Swift_Transport_Esmtp_AuthHandler implements Swift_Transport_EsmtpHandler
      *
      * @return string
      */
-    public function getUsername()
+    public function getUsername(): string
     {
         return $this->username;
     }
@@ -115,7 +115,7 @@ class Swift_Transport_Esmtp_AuthHandler implements Swift_Transport_EsmtpHandler
      *
      * @return string
      */
-    public function getPassword()
+    public function getPassword(): string
     {
         return $this->password;
     }
@@ -135,25 +135,21 @@ class Swift_Transport_Esmtp_AuthHandler implements Swift_Transport_EsmtpHandler
      *
      * @return string
      */
-    public function getAuthMode()
+    public function getAuthMode(): string
     {
         return $this->auth_mode;
     }
 
     /**
-     * Get the name of the ESMTP extension this handles.
-     *
-     * @return bool
+     * {@inheritdoc}
      */
-    public function getHandledKeyword()
+    public function getHandledKeyword(): string
     {
         return 'AUTH';
     }
 
     /**
-     * Set the parameters which the EHLO greeting indicated.
-     *
-     * @param string[] $parameters
+     * {@inheritdoc}
      */
     public function setKeywordParams(array $parameters)
     {
@@ -164,12 +160,13 @@ class Swift_Transport_Esmtp_AuthHandler implements Swift_Transport_EsmtpHandler
      * Runs immediately after a EHLO has been issued.
      *
      * @param Swift_Transport_SmtpAgent $agent to read/write
+     * @throws \Swift_TransportException
      */
     public function afterEhlo(Swift_Transport_SmtpAgent $agent)
     {
         if ($this->username) {
             $count = 0;
-            foreach ($this->getAuthenticatorsForAgent() as $authenticator) {
+            foreach ($this->getAuthenticatorsForAgent($agent) as $authenticator) {
                 if (in_array(strtolower($authenticator->getAuthKeyword()),
                     array_map('strtolower', $this->esmtpParams))) {
                     ++$count;
@@ -188,7 +185,7 @@ class Swift_Transport_Esmtp_AuthHandler implements Swift_Transport_EsmtpHandler
     /**
      * Not used.
      */
-    public function getMailParams()
+    public function getMailParams(): array
     {
         return array();
     }
@@ -196,7 +193,7 @@ class Swift_Transport_Esmtp_AuthHandler implements Swift_Transport_EsmtpHandler
     /**
      * Not used.
      */
-    public function getRcptParams()
+    public function getRcptParams(): array
     {
         return array();
     }
@@ -217,17 +214,15 @@ class Swift_Transport_Esmtp_AuthHandler implements Swift_Transport_EsmtpHandler
      *
      * @return int
      */
-    public function getPriorityOver($esmtpKeyword)
+    public function getPriorityOver($esmtpKeyword): int
     {
         return 0;
     }
 
     /**
-     * Returns an array of method names which are exposed to the Esmtp class.
-     *
-     * @return string[]
+     * {@inheritdoc}
      */
-    public function exposeMixinMethods()
+    public function exposeMixinMethods(): array
     {
         return array('setUsername', 'getUsername', 'setPassword', 'getPassword', 'setAuthMode', 'getAuthMode');
     }
@@ -245,15 +240,16 @@ class Swift_Transport_Esmtp_AuthHandler implements Swift_Transport_EsmtpHandler
      * @param Swift_Transport_SmtpAgent $agent
      *
      * @return array
+     * @throws \Swift_TransportException
      */
-    protected function getAuthenticatorsForAgent()
+    protected function getAuthenticatorsForAgent(Swift_Transport_SmtpAgent $agent): array
     {
         if (!$mode = strtolower($this->auth_mode)) {
             return $this->authenticators;
         }
 
         foreach ($this->authenticators as $authenticator) {
-            if (strtolower($authenticator->getAuthKeyword()) == $mode) {
+            if (strtolower($authenticator->getAuthKeyword()) === $mode) {
                 return array($authenticator);
             }
         }

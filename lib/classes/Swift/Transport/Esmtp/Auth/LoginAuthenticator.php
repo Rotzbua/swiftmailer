@@ -16,25 +16,17 @@
 class Swift_Transport_Esmtp_Auth_LoginAuthenticator implements Swift_Transport_Esmtp_Authenticator
 {
     /**
-     * Get the name of the AUTH mechanism this Authenticator handles.
-     *
-     * @return string
+     * {@inheritdoc}
      */
-    public function getAuthKeyword()
+    public function getAuthKeyword(): string
     {
         return 'LOGIN';
     }
 
     /**
-     * Try to authenticate the user with $username and $password.
-     *
-     * @param Swift_Transport_SmtpAgent $agent
-     * @param string                    $username
-     * @param string                    $password
-     *
-     * @return bool
+     * {@inheritdoc}
      */
-    public function authenticate(Swift_Transport_SmtpAgent $agent, $username, $password)
+    public function authenticate(Swift_Transport_SmtpAgent $agent, string $username, string $password): bool
     {
         try {
             $agent->executeCommand("AUTH LOGIN\r\n", array(334));
