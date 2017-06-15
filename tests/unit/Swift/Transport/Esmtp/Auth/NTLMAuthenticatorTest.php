@@ -187,7 +187,7 @@ class Swift_Transport_Esmtp_Auth_NTLMAuthenticatorTest extends \SwiftMailerTestC
         return new Swift_Transport_Esmtp_Auth_NTLMAuthenticator();
     }
 
-    private function getAgent(): \Mockery\Mock
+    private function getAgent()
     {
         return $this->getMockery('Swift_Transport_SmtpAgent')->shouldIgnoreMissing();
     }
