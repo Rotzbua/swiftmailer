@@ -185,7 +185,7 @@ class Swift_Transport_Esmtp_Auth_NTLMAuthenticator implements Swift_Transport_Es
      *
      * @return string
      */
-    protected function sendMessage3($response, $username, $password, $timestamp, $client, Swift_Transport_SmtpAgent $agent, bool $v2 = true): string
+    protected function sendMessage3(string $response, string $username, string $password, string $timestamp, string $client, Swift_Transport_SmtpAgent $agent, bool $v2 = true): string
     {
         list($domain, $username) = $this->getDomainAndUsername($username);
         //$challenge, $context, $targetInfoH, $targetName, $domainName, $workstation, $DNSDomainName, $DNSServerName, $blob, $ter
@@ -246,17 +246,17 @@ class Swift_Transport_Esmtp_Auth_NTLMAuthenticator implements Swift_Transport_Es
 
         return self::NTLMSIG
         .$this->createByte('03') // TYPE 3 message
-.$lmSec // LM response header
-.$ntlmSec // NTLM response header
-.$domainSec // Domain header
-.$userSec // User header
-.$workSec // Workstation header
-.$this->createByte('000000009a', 8) // session key header (empty)
-.$this->createByte('01020000') // FLAGS
-.$this->convertTo16bit($domain) // domain name
-.$this->convertTo16bit($username) // username
-.$this->convertTo16bit($workstation) // workstation
-.$lmResponse
+        .$lmSec // LM response header
+        .$ntlmSec // NTLM response header
+        .$domainSec // Domain header
+        .$userSec // User header
+        .$workSec // Workstation header
+        .$this->createByte('000000009a', 8) // session key header (empty)
+        .$this->createByte('01020000') // FLAGS
+        .$this->convertTo16bit($domain) // domain name
+        .$this->convertTo16bit($username) // username
+        .$this->convertTo16bit($workstation) // workstation
+        .$lmResponse
         .$ntlmResponse;
     }
 
