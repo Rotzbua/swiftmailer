@@ -185,7 +185,7 @@ class Swift_Transport_Esmtp_Auth_NTLMAuthenticator implements Swift_Transport_Es
      *
      * @return string
      */
-    protected function sendMessage3(string $response, string $username, string $password, string $timestamp, string $client, Swift_Transport_SmtpAgent $agent, bool $v2 = true): string
+    protected function sendMessage3(string $response, string $username, string $password, string $timestamp, string $client, Swift_Transport_SmtpAgent $agent, bool $v2 = true)
     {
         list($domain, $username) = $this->getDomainAndUsername($username);
         //$challenge, $context, $targetInfoH, $targetName, $domainName, $workstation, $DNSDomainName, $DNSServerName, $blob, $ter
