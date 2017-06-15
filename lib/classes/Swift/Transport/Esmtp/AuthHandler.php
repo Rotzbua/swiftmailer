@@ -214,7 +214,7 @@ class Swift_Transport_Esmtp_AuthHandler implements Swift_Transport_EsmtpHandler
      *
      * @return int
      */
-    public function getPriorityOver($esmtpKeyword): int
+    public function getPriorityOver(string $esmtpKeyword): int
     {
         return 0;
     }

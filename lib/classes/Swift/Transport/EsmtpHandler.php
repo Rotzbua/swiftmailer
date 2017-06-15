@@ -70,7 +70,7 @@ interface Swift_Transport_EsmtpHandler
      *
      * @return int
      */
-    public function getPriorityOver($esmtpKeyword): int;
+    public function getPriorityOver(string $esmtpKeyword): int;
 
     /**
      * Returns an array of method names which are exposed to the Esmtp class.
