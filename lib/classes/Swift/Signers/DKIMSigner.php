@@ -344,7 +344,7 @@ class Swift_Signers_DKIMSigner implements Swift_Signers_HeaderSigner
      *
      * @return $this
      */
-    public function setBodyCanon($canon)
+    public function setBodyCanon(string $canon)
     {
         switch ($canon) {
             case 'simple':
