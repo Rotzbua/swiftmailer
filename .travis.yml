@@ -15,7 +15,7 @@ script: SYMFONY_PHPUNIT_VERSION=6.1 ./vendor/bin/simple-phpunit
 
 matrix:
     include:
-        - php: hhvm
+        - hhvm
             env:
               global:
                  - hhvm.php7.all = 1
